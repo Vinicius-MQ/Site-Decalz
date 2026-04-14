@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Decalz homepage</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+    <h1>Decalz</h1>
+    <h2>decalques para suas miniaturas</h2>
+    <h3>Cadastro de Decalque</h3>
+    <input id="nome" placeholder="Nome do decalque">
+    <input id="tipo" placeholder="tipo do decalque">
+    <input id= "link" placeholder="link da imagem do decalque">
+    <button onclick="adicionar()">Adicionar</button>
+
+    <ul id="lista"> </ul>
+
+        <script>
+            ListaDeProjetos=[]
+
+            function adicionar () {
+                let nome=document.getElementById("nome").value
+                let tipo=document.getElementById("tipo").value
+                let link=document.getElementById("link").value  ///pega valores dos inputs do html
+                let Projeto={
+                nome,tipo,link //cria o objeto
+                }
+                ListaDeProjetos.push(Projeto) // joga o objeto na lista de projetos
+                MostrarNaTela()
+
+            }
+
+            function MostrarNaTela () {
+                let lista=document.getElementById("lista")
+                lista.innerHTML = "";//limpa todo conteudo da lista toda vez q mostra na tela cria a lista do zero
+                for (let i=0;i < ListaDeProjetos.length ;i++){
+                    let item = ListaDeProjetos[i];
+                    lista.innerHTML += `
+                    <li>
+                        ${item.nome} - ${item.tipo} - 
+                        <a href="${item.link}" target="_blank">link para o decalque </a> 
+                         <button onclick="excluir(${i})">Excluir</button>
+                    </li> 
+                  
+                    `;
+
+
+                }
+
+
+            }
+
+            function excluir(index) {
+                ListaDeProjetos.splice(index, 1);
+                 MostrarNaTela();
+            }
+
+            
+
+
+
+
+
+        </script>
+</body>
+</html>
