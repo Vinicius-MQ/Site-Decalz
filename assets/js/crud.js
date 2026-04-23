@@ -1,56 +1,77 @@
-ListaDeProjetos=[]
-let editandoIndex = -1;//variavel necessaria pra funcionar a edição sem ela a função adicionar não sabe se está editando ou criando uma nova
+ListaDeProjetos = [];
+let editandoIndex = -1; // Indica se o item atual esta em modo de edicao
 
-function adicionar () {
-    let nome=document.getElementById("nome").value
-    let tipo=document.getElementById("tipo").value
-    let link=document.getElementById("link").value  ///pega valores dos inputs do html
-    let Projeto={
-    nome,tipo,link //cria o objeto
+function adicionar() {
+    const nome = document.getElementById("nome").value.trim();
+    const tipo = document.getElementById("tipo").value.trim();
+    const link = document.getElementById("link").value.trim();
+
+    if (!nome || !tipo || !link) {
+        return;
     }
-     if (editandoIndex === -1) {
-        ListaDeProjetos.push(Projeto);// joga o objeto na lista de projetos
-    } else {
-        ListaDeProjetos[editandoIndex] = Projeto;
-        editandoIndex = -1;
-    } ///verifica se está editando
 
-    MostrarNaTela()
+    const projeto = {
+        nome,
+        tipo,
+        link
+    };
+
+    if (editandoIndex === -1) {
+        ListaDeProjetos.push(projeto);
+    } else {
+        ListaDeProjetos[editandoIndex] = projeto;
+        editandoIndex = -1;
+    }
+
+    document.getElementById("nome").value = "";
+    document.getElementById("tipo").value = "";
+    document.getElementById("link").value = "";
+
+    MostrarNaTela();
 
 }
 
-function MostrarNaTela () {
-    let lista=document.getElementById("lista")
-    lista.innerHTML = "";//limpa todo conteudo da lista toda vez q mostra na tela cria a lista do zero
-    for (let i=0;i < ListaDeProjetos.length ;i++){
-        let item = ListaDeProjetos[i];
-        lista.innerHTML += `
-        <li>
-            ${item.nome} - ${item.tipo} - 
-            <a href="${item.link}" target="_blank">link para o decalque </a> 
-             <button onclick="editar(${i})">Editar</button>
-             <button onclick="excluir(${i})">Excluir</button>
-        </li> 
-      
-        `;
+function MostrarNaTela() {
+    const lista = document.getElementById("lista");
+    lista.innerHTML = "";
 
-
+    if (ListaDeProjetos.length === 0) {
+        lista.innerHTML = '<li class="project-empty">Nenhum item cadastrado em ListaDeProjetos.</li>';
+        return;
     }
 
-
+    for (let i = 0; i < ListaDeProjetos.length; i++) {
+        const item = ListaDeProjetos[i];
+        lista.innerHTML += `
+        <li class="project-item">
+            <img class="project-image" src="${item.link}" alt="${item.nome}" loading="lazy">
+            <div class="project-content">
+                <h3 class="project-name">${item.nome}</h3>
+                <p class="project-type">${item.tipo}</p>
+                <a class="project-link" href="${item.link}" target="_blank" rel="noopener noreferrer">Abrir imagem</a>
+                <div class="project-actions">
+                    <button class="btn-action" onclick="editar(${i})">Editar</button>
+                    <button class="btn-action" onclick="excluir(${i})">Excluir</button>
+                </div>
+            </div>
+        </li>
+        `;
+    }
 }
 
 function excluir(index) {
     ListaDeProjetos.splice(index, 1);
-     MostrarNaTela();
+    MostrarNaTela();
 }
 
 function editar(index) {
-    let item = ListaDeProjetos[index];
+    const item = ListaDeProjetos[index];
 
     document.getElementById("nome").value = item.nome;
     document.getElementById("tipo").value = item.tipo;
     document.getElementById("link").value = item.link;
 
-    editandoIndex = index;   /////substitui os elementos do projeto, através do index
+    editandoIndex = index;
 }
+
+MostrarNaTela();
