@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Decalz — Decalques para Miniaturas</title>
+<link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Barlow:wght@400;500;600;700;900&family=Barlow+Condensed:wght@700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <a href="#topo" class="nav-logo">DECALZ<span></span></a>
+  <ul class="nav-links">
+    <li><a href="#colecoes">Coleções</a></li>
+    <li><a href="#categorias">Categorias</a></li>
+    <li><a href="#personalizado">Personalizado</a></li>
+    <li><a href="#sobre">Sobre</a></li>
+    <li><a href="{{ url_for('crud') }}" class="nav-cta">Ver Catálogo</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="topo" class="hero">
+  <div class="hero-left">
+    <div class="hero-tag">Especialistas em Miniaturas</div>
+    <h1 class="hero-title">
+      DETALHES<br>
+      QUE <span class="red">FAZEM</span><br>
+      A DIFERENÇA
+    </h1>
+    <p class="hero-subtitle">
+      Decalques de alta precisão para miniaturas de guerra, RPG, Scale Models e dioramas. Qualidade profissional, acabamento imaculado.
+    </p>
+    <div class="hero-actions">
+      <a href="#colecoes" class="btn-primary">Explorar Coleção</a>
+      <a href="{{ url_for('crud') }}" class="btn-outline">Ver Catálogo</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <span class="stat-num">2.400+</span>
+        <span class="stat-label">Decalques</span>
+      </div>
+      <div>
+        <span class="stat-num">180+</span>
+        <span class="stat-label">Coleções</span>
+      </div>
+      <div>
+        <span class="stat-num">98%</span>
+        <span class="stat-label">Satisfação</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="hero-visual">
+      <div class="hero-circle c1"></div>
+      <div class="hero-circle c2"></div>
+      <div class="hero-circle c3"></div>
+
+      <div class="hero-miniature-showcase">
+        <div class="mini-card">
+          <div class="mini-card-img">
+            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+              <rect width="100" height="100" fill="rgba(255,255,255,0.1)" rx="4"/>
+              <rect x="15" y="35" width="70" height="30" rx="3" fill="rgba(255,255,255,0.3)"/>
+              <circle cx="28" cy="68" r="10" fill="rgba(255,255,255,0.2)" stroke="white" stroke-width="2"/>
+              <circle cx="72" cy="68" r="10" fill="rgba(255,255,255,0.2)" stroke="white" stroke-width="2"/>
+              <rect x="35" y="20" width="30" height="18" rx="2" fill="rgba(255,255,255,0.2)"/>
+              <rect x="10" y="40" width="12" height="20" rx="1" fill="rgba(255,255,255,0.15)"/>
+              <!-- Decalque -->
+              <rect x="35" y="40" width="30" height="15" rx="1" fill="white" opacity="0.6"/>
+              <line x1="38" y1="45" x2="62" y2="45" stroke="#CC1F1F" stroke-width="1.5"/>
+              <line x1="38" y1="48" x2="55" y2="48" stroke="#CC1F1F" stroke-width="1.5"/>
+              <line x1="38" y1="51" x2="58" y2="51" stroke="#CC1F1F" stroke-width="1"/>
+            </svg>
+          </div>
+          <div class="mini-card-title">Blindados WW2</div>
+          <div class="mini-card-sub">32 designs</div>
+        </div>
+
+        <div class="mini-card">
+          <div class="mini-card-img">
+            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+              <rect width="100" height="100" fill="rgba(255,255,255,0.1)" rx="4"/>
+              <!-- Nave -->
+              <ellipse cx="50" cy="55" rx="30" ry="12" fill="rgba(255,255,255,0.25)"/>
+              <polygon points="50,20 35,50 65,50" fill="rgba(255,255,255,0.2)"/>
+              <rect x="44" y="50" width="12" height="8" fill="rgba(255,255,255,0.3)"/>
+              <line x1="20" y1="55" x2="30" y2="55" stroke="white" stroke-width="1.5" opacity="0.5"/>
+              <line x1="70" y1="55" x2="80" y2="55" stroke="white" stroke-width="1.5" opacity="0.5"/>
+              <!-- Decalque no corpo -->
+              <rect x="38" y="43" width="24" height="10" rx="1" fill="white" opacity="0.7"/>
+              <polygon points="45,46 48,49 45,52" fill="#CC1F1F"/>
+              <line x1="50" y1="46" x2="60" y2="46" stroke="#CC1F1F" stroke-width="1"/>
+              <line x1="50" y1="49" x2="58" y2="49" stroke="#CC1F1F" stroke-width="1"/>
+            </svg>
+          </div>
+          <div class="mini-card-title">Sci-Fi / Naves</div>
+          <div class="mini-card-sub">56 designs</div>
+        </div>
+
+        <div class="mini-card">
+          <div class="mini-card-img">
+            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+              <rect width="100" height="100" fill="rgba(255,255,255,0.1)" rx="4"/>
+              <!-- Figura RPG -->
+              <circle cx="50" cy="28" r="10" fill="rgba(255,255,255,0.25)"/>
+              <path d="M40 40 Q50 35 60 40 L65 70 Q50 75 35 70 Z" fill="rgba(255,255,255,0.2)"/>
+              <path d="M35 42 L20 60 L28 65 L42 48 Z" fill="rgba(255,255,255,0.15)"/>
+              <path d="M65 42 L80 60 L72 65 L58 48 Z" fill="rgba(255,255,255,0.15)"/>
+              <!-- Escudo com decalque -->
+              <ellipse cx="72" cy="50" rx="12" ry="14" fill="rgba(255,255,255,0.7)"/>
+              <path d="M72,38 L60,44 L60,56 Q66,63 72,65 Q78,63 84,56 L84,44 Z" fill="white" opacity="0.6"/>
+              <polygon points="72,42 78,52 66,52" fill="#CC1F1F"/>
+              <line x1="67" y1="56" x2="77" y2="56" stroke="#CC1F1F" stroke-width="1"/>
+            </svg>
+          </div>
+          <div class="mini-card-title">RPG & Fantasy</div>
+          <div class="mini-card-sub">88 designs</div>
+        </div>
+
+        <div class="mini-card">
+          <div class="mini-card-img">
+            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+              <rect width="100" height="100" fill="rgba(255,255,255,0.1)" rx="4"/>
+              <!-- Capacete -->
+              <ellipse cx="50" cy="45" rx="28" ry="22" fill="rgba(255,255,255,0.2)"/>
+              <rect x="22" y="55" width="56" height="10" rx="2" fill="rgba(255,255,255,0.15)"/>
+              <rect x="30" y="53" width="40" height="5" rx="1" fill="rgba(255,255,255,0.3)"/>
+              <!-- Viseira -->
+              <rect x="32" y="40" width="36" height="15" rx="2" fill="rgba(100,180,255,0.3)"/>
+              <!-- Decalque lateral -->
+              <rect x="26" y="35" width="18" height="10" rx="1" fill="white" opacity="0.65"/>
+              <text x="29" y="43" font-family="monospace" font-size="8" fill="#CC1F1F" font-weight="bold">XIII</text>
+            </svg>
+          </div>
+          <div class="mini-card-title">Warhammer</div>
+          <div class="mini-card-sub">124 designs</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CARROSSEL ESTÁTICO -->
+<section id="colecoes" class="carousel-section">
+  <div class="section-header">
+    <div>
+      <div class="section-tag">Mais Vendidos</div>
+      <h2 class="section-title">Coleções em Destaque</h2>
+    </div>
+    <a href="#" class="btn-outline">Ver Todos</a>
+  </div>
+
+  <div class="carousel-wrapper">
+    <div class="carousel-track">
+
+      <!-- Card 1 -->
+      <div class="carousel-card">
+        <div class="card-badge">Novo</div>
+        <div class="card-bg">
+          <svg class="card-svg" viewBox="0 0 240 320" xmlns="http://www.w3.org/2000/svg">
+            <!-- BG -->
+            <rect width="240" height="320" fill="#1a1a2e"/>
+            <!-- Padrão de pontos -->
+            <pattern id="dots" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+              <circle cx="10" cy="10" r="1" fill="rgba(255,255,255,0.06)"/>
+            </pattern>
+            <rect width="240" height="320" fill="url(#dots)"/>
+            <!-- Tanque estilizado -->
+            <rect x="40" y="160" width="160" height="70" rx="4" fill="#2d3561"/>
+            <rect x="60" y="130" width="120" height="50" rx="3" fill="#3d4a7a"/>
+            <rect x="90" y="110" width="60" height="25" rx="2" fill="#4a5894"/>
+            <rect x="100" y="100" width="80" height="12" rx="2" fill="#555fa8"/>
+            <circle cx="70" cy="235" r="22" fill="#1a1f40" stroke="#3d4a7a" stroke-width="3"/>
+            <circle cx="70" cy="235" r="12" fill="#252b55"/>
+            <circle cx="170" cy="235" r="22" fill="#1a1f40" stroke="#3d4a7a" stroke-width="3"/>
+            <circle cx="170" cy="235" r="12" fill="#252b55"/>
+            <!-- Decalques no tanque -->
+            <rect x="80" y="148" width="80" height="28" rx="2" fill="white" opacity="0.9"/>
+            <text x="90" y="158" font-family="Arial" font-size="7" fill="#CC1F1F" font-weight="bold">PANZER DIV.</text>
+            <line x1="85" y1="162" x2="155" y2="162" stroke="#CC1F1F" stroke-width="1.5"/>
+            <text x="90" y="172" font-family="Arial" font-size="10" fill="#1a1a2e" font-weight="bold">■ IV ■</text>
+            <!-- Cruz no topo -->
+            <rect x="115" y="112" width="10" height="20" fill="white" opacity="0.8"/>
+            <rect x="108" y="119" width="24" height="7" fill="white" opacity="0.8"/>
+            <!-- Nome + preço -->
+            <rect x="0" y="270" width="240" height="50" fill="rgba(0,0,0,0.5)"/>
+            <text x="16" y="291" font-family="Arial" font-size="11" fill="white" font-weight="bold">PANZER ELITE</text>
+            <text x="16" y="308" font-family="Arial" font-size="9" fill="rgba(255,255,255,0.55)">18 decalques · Escala 1:35</text>
+          </svg>
+        </div>
+        <div class="card-overlay">
+          <div class="card-overlay-title">Panzer Elite</div>
+          <div class="card-overlay-sub">Blindados alemães WW2 · R$ 34,90</div>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="carousel-card">
+        <div class="card-badge" style="background:#111;">Popular</div>
+        <div class="card-bg">
+          <svg class="card-svg" viewBox="0 0 240 320" xmlns="http://www.w3.org/2000/svg">
+            <rect width="240" height="320" fill="#0d1b0d"/>
+            <pattern id="dots2" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+              <circle cx="10" cy="10" r="1" fill="rgba(255,255,255,0.05)"/>
+            </pattern>
+            <rect width="240" height="320" fill="url(#dots2)"/>
+            <!-- Nave espacial -->
+            <polygon points="120,60 70,200 90,195 120,180 150,195 170,200" fill="#1a2e1a"/>
+            <polygon points="120,60 100,130 120,120 140,130" fill="#223322"/>
+            <!-- Motores -->
+            <ellipse cx="90" cy="196" rx="18" ry="8" fill="#1a3a1a"/>
+            <ellipse cx="150" cy="196" rx="18" ry="8" fill="#1a3a1a"/>
+            <!-- Chama -->
+            <ellipse cx="90" cy="205" rx="8" ry="14" fill="#CC1F1F" opacity="0.7"/>
+            <ellipse cx="150" cy="205" rx="8" ry="14" fill="#CC1F1F" opacity="0.7"/>
+            <ellipse cx="90" cy="208" rx="4" ry="8" fill="#ff6600" opacity="0.8"/>
+            <ellipse cx="150" cy="208" rx="4" ry="8" fill="#ff6600" opacity="0.8"/>
+            <!-- Cockpit -->
+            <ellipse cx="120" cy="100" rx="16" ry="20" fill="#1a4a3a" stroke="#2a7a5a" stroke-width="1.5"/>
+            <!-- Decalque na asa -->
+            <rect x="75" y="160" width="32" height="18" rx="2" fill="white" opacity="0.85"/>
+            <circle cx="86" cy="169" r="6" fill="none" stroke="#CC1F1F" stroke-width="2"/>
+            <text x="95" y="173" font-family="Arial" font-size="8" fill="#1a2e1a" font-weight="bold">X-7</text>
+            <rect x="133" y="160" width="32" height="18" rx="2" fill="white" opacity="0.85"/>
+            <circle cx="144" cy="169" r="6" fill="none" stroke="#CC1F1F" stroke-width="2"/>
+            <text x="153" y="173" font-family="Arial" font-size="8" fill="#1a2e1a" font-weight="bold">X-7</text>
+            <!-- Estrelas BG -->
+            <circle cx="30" cy="40" r="1" fill="white" opacity="0.5"/>
+            <circle cx="200" cy="80" r="1.5" fill="white" opacity="0.6"/>
+            <circle cx="50" cy="130" r="1" fill="white" opacity="0.4"/>
+            <circle cx="210" cy="160" r="1" fill="white" opacity="0.5"/>
+            <circle cx="180" cy="40" r="1" fill="white" opacity="0.3"/>
+            <circle cx="20" cy="240" r="1.5" fill="white" opacity="0.5"/>
+            <rect x="0" y="270" width="240" height="50" fill="rgba(0,0,0,0.5)"/>
+            <text x="16" y="291" font-family="Arial" font-size="11" fill="white" font-weight="bold">STARFORCE X</text>
+            <text x="16" y="308" font-family="Arial" font-size="9" fill="rgba(255,255,255,0.55)">24 decalques · Escala 1:72</text>
+          </svg>
+        </div>
+        <div class="card-overlay">
+          <div class="card-overlay-title">Starforce X</div>
+          <div class="card-overlay-sub">Ficção Científica · R$ 28,90</div>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="carousel-card">
+        <div class="card-badge" style="background:#8B0000;">Exclusivo</div>
+        <div class="card-bg">
+          <svg class="card-svg" viewBox="0 0 240 320" xmlns="http://www.w3.org/2000/svg">
+            <rect width="240" height="320" fill="#1e0a0a"/>
+            <pattern id="dots3" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+              <circle cx="10" cy="10" r="1" fill="rgba(255,100,100,0.06)"/>
+            </pattern>
+            <rect width="240" height="320" fill="url(#dots3)"/>
+            <!-- Guerreiro medieval -->
+            <!-- Corpo -->
+            <rect x="95" y="130" width="50" height="70" rx="3" fill="#3a2020"/>
+            <!-- Cabeça/Capacete -->
+            <ellipse cx="120" cy="115" rx="22" ry="20" fill="#4a2828"/>
+            <rect x="98" y="108" width="44" height="15" rx="2" fill="#5a3030"/>
+            <!-- Ombros -->
+            <ellipse cx="88" cy="135" rx="15" ry="10" fill="#3a2020"/>
+            <ellipse cx="152" cy="135" rx="15" ry="10" fill="#3a2020"/>
+            <!-- Escudo -->
+            <path d="M55,140 L55,185 Q55,205 75,215 Q80,217 80,215 L80,140 Z" fill="#5a1515"/>
+            <path d="M55,140 L80,140 L80,215 Q55,205 55,185 Z" fill="#6a1a1a"/>
+            <!-- Decalque no escudo -->
+            <rect x="57" y="152" width="20" height="28" rx="2" fill="white" opacity="0.85"/>
+            <path d="M67,156 L57,166 L67,176 L77,166 Z" fill="#CC1F1F"/>
+            <line x1="62" y1="173" x2="72" y2="173" stroke="#CC1F1F" stroke-width="1.5"/>
+            <!-- Espada -->
+            <rect x="165" y="90" width="6" height="120" rx="1" fill="#8a8a8a"/>
+            <rect x="155" y="120" width="26" height="6" rx="1" fill="#aaaaaa"/>
+            <rect x="163" y="105" width="10" height="15" rx="1" fill="#bbaa00"/>
+            <!-- Decoração do capacete -->
+            <rect x="106" y="108" width="28" height="8" rx="1" fill="white" opacity="0.7"/>
+            <text x="108" y="116" font-family="Arial" font-size="7" fill="#CC1F1F" font-weight="bold">CROM ■ IV</text>
+            <!-- Joelhos -->
+            <ellipse cx="105" cy="200" rx="10" ry="8" fill="#4a2828"/>
+            <ellipse cx="135" cy="200" rx="10" ry="8" fill="#4a2828"/>
+            <rect x="0" y="270" width="240" height="50" fill="rgba(0,0,0,0.55)"/>
+            <text x="16" y="291" font-family="Arial" font-size="11" fill="white" font-weight="bold">IRON KINGDOM</text>
+            <text x="16" y="308" font-family="Arial" font-size="9" fill="rgba(255,255,255,0.55)">36 decalques · RPG Medieval</text>
+          </svg>
+        </div>
+        <div class="card-overlay">
+          <div class="card-overlay-title">Iron Kingdom</div>
+          <div class="card-overlay-sub">Medieval / RPG · R$ 42,90</div>
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="carousel-card">
+        <div class="card-badge" style="background:#333;">Kit</div>
+        <div class="card-bg">
+          <svg class="card-svg" viewBox="0 0 240 320" xmlns="http://www.w3.org/2000/svg">
+            <rect width="240" height="320" fill="#0a0a1a"/>
+            <pattern id="dots4" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+              <circle cx="10" cy="10" r="1" fill="rgba(255,255,255,0.04)"/>
+            </pattern>
+            <rect width="240" height="320" fill="url(#dots4)"/>
+            <!-- Mech / Warhammer style -->
+            <!-- Pernas -->
+            <rect x="85" y="210" width="28" height="70" rx="3" fill="#2a2a3a"/>
+            <rect x="127" y="210" width="28" height="70" rx="3" fill="#2a2a3a"/>
+            <!-- Joelhos -->
+            <rect x="82" y="205" width="34" height="14" rx="4" fill="#3a3a4a"/>
+            <rect x="124" y="205" width="34" height="14" rx="4" fill="#3a3a4a"/>
+            <!-- Torso -->
+            <rect x="78" y="130" width="84" height="85" rx="5" fill="#2a2a3a"/>
+            <!-- Peito com decalque -->
+            <rect x="88" y="140" width="64" height="40" rx="3" fill="#3a3a4a"/>
+            <!-- DECALQUE PRINCIPAL -->
+            <rect x="92" y="145" width="56" height="30" rx="2" fill="white" opacity="0.9"/>
+            <!-- Caveira estilizada -->
+            <ellipse cx="120" cy="155" rx="12" ry="10" fill="#1a0505"/>
+            <ellipse cx="115" cy="157" rx="3" ry="4" fill="white" opacity="0.8"/>
+            <ellipse cx="125" cy="157" rx="3" ry="4" fill="white" opacity="0.8"/>
+            <rect x="113" y="163" width="14" height="5" rx="1" fill="white" opacity="0.6"/>
+            <line x1="116" y1="164" x2="116" y2="168" stroke="#1a0505" stroke-width="1"/>
+            <line x1="120" y1="164" x2="120" y2="168" stroke="#1a0505" stroke-width="1"/>
+            <line x1="124" y1="164" x2="124" y2="168" stroke="#1a0505" stroke-width="1"/>
+            <!-- Ombros -->
+            <rect x="48" y="130" width="34" height="30" rx="4" fill="#3a3a4a"/>
+            <rect x="158" y="130" width="34" height="30" rx="4" fill="#3a3a4a"/>
+            <!-- Braços -->
+            <rect x="52" y="155" width="26" height="55" rx="3" fill="#2a2a3a"/>
+            <rect x="162" y="155" width="26" height="55" rx="3" fill="#2a2a3a"/>
+            <!-- Cabeça -->
+            <rect x="95" y="95" width="50" height="40" rx="4" fill="#3a3a4a"/>
+            <rect x="100" y="105" width="40" height="18" rx="2" fill="#CC1F1F" opacity="0.6"/>
+            <!-- Olhos -->
+            <rect x="103" y="109" rx="2" width="14" height="8" fill="#CC1F1F" opacity="0.9"/>
+            <rect x="123" y="109" rx="2" width="14" height="8" fill="#CC1F1F" opacity="0.9"/>
+            <!-- Numero -->
+            <text x="96" y="135" font-family="Arial" font-size="8" fill="rgba(255,255,255,0.4)">UNIT 08</text>
+            <rect x="0" y="270" width="240" height="50" fill="rgba(0,0,0,0.55)"/>
+            <text x="16" y="291" font-family="Arial" font-size="11" fill="white" font-weight="bold">DEATH GUARD</text>
+            <text x="16" y="308" font-family="Arial" font-size="9" fill="rgba(255,255,255,0.55)">52 decalques · Warhammer 40K</text>
+          </svg>
+        </div>
+        <div class="card-overlay">
+          <div class="card-overlay-title">Death Guard</div>
+          <div class="card-overlay-sub">Warhammer 40K · R$ 49,90</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CATEGORIAS -->
+<section id="categorias" class="categories-section">
+  <div>
+    <div class="section-tag">Navegue por Tema</div>
+    <h2 class="section-title">Todas as Categorias</h2>
+  </div>
+  <div class="cat-grid">
+    <div class="cat-card">
+      <div class="cat-icon">🛡️</div>
+      <div class="cat-name">Warhammer & Miniatures</div>
+      <div class="cat-desc">Space Marines, Chaos, Necrons e muito mais para os guerreiros do grimdark.</div>
+      <div class="cat-count">↗ 124 designs disponíveis</div>
+    </div>
+    <div class="cat-card">
+      <div class="cat-icon">🪖</div>
+      <div class="cat-name">Escala Militar</div>
+      <div class="cat-desc">Tanques, aeronaves e veículos históricos com insígnias e camuflagens autênticas.</div>
+      <div class="cat-count">↗ 310 designs disponíveis</div>
+    </div>
+    <div class="cat-card">
+      <div class="cat-icon">🚀</div>
+      <div class="cat-name">Sci-Fi & Ficção</div>
+      <div class="cat-desc">Naves, mechs e emblemas de universos futuristas — da ficção à realidade.</div>
+      <div class="cat-count">↗ 192 designs disponíveis</div>
+    </div>
+    <div class="cat-card">
+      <div class="cat-icon">⚔️</div>
+      <div class="cat-name">RPG & Fantasy</div>
+      <div class="cat-desc">Brasões, runas e símbolos para aventureiros de qualquer sistema de RPG.</div>
+      <div class="cat-count">↗ 88 designs disponíveis</div>
+    </div>
+    <div class="cat-card">
+      <div class="cat-icon">🎨</div>
+      <div class="cat-name">Personalizado</div>
+      <div class="cat-desc">Envie seu design e criamos decalques únicos para seu projeto exclusivo.</div>
+      <div class="cat-count">↗ Solicitar orçamento</div>
+    </div>
+    <div class="cat-card">
+      <div class="cat-icon">🏎️</div>
+      <div class="cat-name">Automobilismo</div>
+      <div class="cat-desc">F1, Le Mans, rally e Street — liveries e patrocinadores históricos em miniatura.</div>
+      <div class="cat-count">↗ 76 designs disponíveis</div>
+    </div>
+  </div>
+</section>
+
+<!-- COMO FUNCIONA -->
+<section class="how-section">
+  <div>
+    <div class="section-tag" style="color:rgba(255,100,100,0.7);">Processo</div>
+    <h2 class="section-title">Como Funciona</h2>
+  </div>
+  <div class="how-grid">
+    <div class="how-step">
+      <div class="step-num">01</div>
+      <div class="step-title">Escolha</div>
+      <div class="step-desc">Navegue pelo catálogo e selecione os decalques que combinam com sua miniatura.</div>
+      <div class="step-line"></div>
+    </div>
+    <div class="how-step">
+      <div class="step-num">02</div>
+      <div class="step-title">Peça</div>
+      <div class="step-desc">Finalize o pedido e receba em casa — produzimos em papel de alta qualidade.</div>
+      <div class="step-line"></div>
+    </div>
+    <div class="how-step">
+      <div class="step-num">03</div>
+      <div class="step-title">Aplique</div>
+      <div class="step-desc">Mergulhe em água, posicione e aplique. Em minutos, acabamento profissional.</div>
+      <div class="step-line"></div>
+    </div>
+    <div class="how-step">
+      <div class="step-num">04</div>
+      <div class="step-title">Finalize</div>
+      <div class="step-desc">Verniz fosco, satin ou brilho para fixar. Sua miniatura pronta para o campo.</div>
+    </div>
+  </div>
+</section>
+
+<!-- BANNER NEWSLETTER -->
+<section id="personalizado" class="banner-section">
+  <div class="banner-text">
+    <h2 class="section-title" style="color:white;font-size:2.8rem;">NOVIDADES EM<br>PRIMEIRA MÃO</h2>
+    <p>Receba lançamentos, promoções e tutoriais direto no seu e-mail.</p>
+  </div>
+  <div class="banner-input">
+    <input type="email" placeholder="seu@email.com">
+    <button>Inscrever</button>
+  </div>
+</section>
+
+<!-- HIGHLIGHTS -->
+<section id="sobre" class="highlights-section">
+  <div>
+    <div class="section-tag">Em Foco</div>
+    <h2 class="section-title">Porque Escolher a Decalz</h2>
+  </div>
+  <div class="highlights-grid">
+    <div class="highlight-main">
+      <div class="highlight-main-bg">🖨️</div>
+      <div class="highlight-main-content">
+        <div class="highlight-tag-badge">Qualidade Premium</div>
+        <div class="highlight-main-title">Impressão de Alta<br>Definição</div>
+        <div class="highlight-main-sub">Tinta pigmentada + papel especial = cores vivas e duráveis.</div>
+      </div>
+    </div>
+    <div class="highlight-side">
+      <div class="side-card">
+        <div class="side-card-icon">📐</div>
+        <div>
+          <div class="side-card-title">Escala Exata</div>
+          <div class="side-card-sub">Decalques calibrados para 1:35, 1:72, 28mm e mais.</div>
+        </div>
+      </div>
+      <div class="side-card">
+        <div class="side-card-icon">🚚</div>
+        <div>
+          <div class="side-card-title">Envio Rápido</div>
+          <div class="side-card-sub">Produção em 24h + entrega para todo o Brasil.</div>
+        </div>
+      </div>
+      <div class="side-card">
+        <div class="side-card-icon">🎯</div>
+        <div>
+          <div class="side-card-title">Fácil Aplicação</div>
+          <div class="side-card-sub">Decalques de imersão em água — sem bolhas, sem complicação.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">
+    <a href="#topo" class="nav-logo" style="font-size:1.8rem;">DECALZ<span></span></a>
+    <p>Decalques de precisão para miniaturas. Feitos no Brasil, com paixão por quem modela.</p>
+  </div>
+  <div class="footer-col">
+    <h4>Produtos</h4>
+    <ul>
+      <li><a href="{{ url_for('crud') }}#lista-projetos">Warhammer</a></li>
+      <li><a href="{{ url_for('crud') }}#lista-projetos">Militar</a></li>
+      <li><a href="{{ url_for('crud') }}#lista-projetos">Sci-Fi</a></li>
+      <li><a href="{{ url_for('crud') }}#lista-projetos">RPG</a></li>
+      <li><a href="#personalizado">Personalizado</a></li>
+    </ul>
+  </div>
+  <div class="footer-col">
+    <h4>Empresa</h4>
+    <ul>
+      <li><a href="#sobre">Sobre Nós</a></li>
+      <li><a href="#">Blog</a></li>
+      <li><a href="#">Tutoriais</a></li>
+      <li><a href="#">Parceiros</a></li>
+    </ul>
+  </div>
+  <div class="footer-col">
+    <h4>Suporte</h4>
+    <ul>
+      <li><a href="#">Contato</a></li>
+      <li><a href="#">FAQ</a></li>
+      <li><a href="#">Trocas</a></li>
+      <li><a href="#">Rastrear Pedido</a></li>
+    </ul>
+  </div>
+</footer>
+<div class="footer-bottom">
+  <p>© 2025 Decalz. Todos os direitos reservados.</p>
+  <p>Feito com ❤️ para miniaturistas</p>
+</div>
+
+</body>
+</html>
+
