@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Decalz - CRUD de Projetos</title>
+    <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Barlow:wght@400;500;600;700;900&family=Barlow+Condensed:wght@700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/crud.css') }}">
+</head>
+<body>
+    <nav>
+        <a href="/#topo" class="nav-logo">DECALZ<span></span></a>
+        <ul class="nav-links">
+            <li><a href="/#colecoes">Coleções</a></li>
+            <li><a href="/#categorias">Categorias</a></li>
+            <li><a href="/#personalizado">Personalizado</a></li>
+            <li><a href="/#sobre">Sobre</a></li>
+            <li><a href="#lista-projetos" class="nav-cta">Ver Catálogo</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section id="crud" class="crud-section">
+            <div class="section-head">
+                <span class="section-tag">Painel interno</span>
+                <h1 class="section-title">Cadastro de Decalques</h1>
+                <p class="section-subtitle">Gerencie os itens de ListaDeProjetos e atualize o catalogo em tempo real.</p>
+            </div>
+
+            <form class="crud-panel" onsubmit="adicionar(); return false;">
+                <div class="field-group">
+                    <label for="nome">Nome do decalque</label>
+                    <input id="nome" type="text" placeholder="Ex: Panzer Elite" />
+                </div>
+
+                <div class="field-group">
+                    <label for="tipo">Tipo</label>
+                    <input id="tipo" type="text" placeholder="Ex: Blindados WW2" />
+                </div>
+
+                <div class="field-group field-full">
+                    <label for="link">Link da imagem</label>
+                    <input id="link" type="url" placeholder="https://..." />
+                </div>
+
+                <button type="submit" class="btn-primary">Salvar item</button>
+            </form>
+        </section>
+
+        <section id="lista-projetos" class="list-section">
+            <div class="section-head">
+                <span class="section-tag">Catalogo</span>
+                <h2 class="section-title">Itens cadastrados</h2>
+            </div>
+            <ul id="lista" class="project-list"></ul>
+        </section>
+    </main>
+
+    <script src="{{ url_for('static', filename='js/ui.js') }}" defer></script>
+    <script src="{{ url_for('static', filename='js/crud.js') }}" defer></script>
+</body>
+</html>
