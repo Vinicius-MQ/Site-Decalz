@@ -1,70 +1,52 @@
 let ListaDeProjetos = [];
-let editandoIndex = -1; // Indica se o item atual esta em modo de edicao
+let editandoIndex = -1;
+
+async function request(url, options = {}) {
+    const res = await fetch(url, options);
+    if (!res.ok) throw new Error("Erro na requisição");
+    return res;
+}
 
 async function carregarProjetos() {
-    const resposta = await fetch("/projetos");
-    if (!resposta.ok) {
-        throw new Error("Falha ao carregar projetos");
-    }
-
-    ListaDeProjetos = await resposta.json();
-    window.ListaDeProjetos = ListaDeProjetos;
-    window.renderizarListaProjetos(ListaDeProjetos, editar, excluir);
+    const res = await request("/projetos");
+    ListaDeProjetos = await res.json();
+    renderizarListaProjetos(ListaDeProjetos, editar, excluir);
 }
 
 async function adicionar() {
-    const { nome, tipo, link } = window.obterValoresFormulario();
+    const { nome, tipo, link } = obterValoresFormulario();
+    if (!nome || !tipo || !link) return;
 
-    if (!nome || !tipo || !link) {
-        return;
-    }
+    const isEdicao = editandoIndex !== -1;
 
-    const projeto = { nome, tipo, link };
-    const metodo = editandoIndex === -1 ? "POST" : "PUT";
-    const url = editandoIndex === -1 ? "/projetos" : `/projetos/${editandoIndex}`;
-
-    const resposta = await fetch(url, {
-        method: metodo,
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(projeto)
-    });
-
-    if (!resposta.ok) {
-        throw new Error("Falha ao salvar projeto");
-    }
+    await request(
+        isEdicao ? `/projetos/${editandoIndex}` : "/projetos",
+        {
+            method: isEdicao ? "PUT" : "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ nome, tipo, link })
+        }
+    );
 
     editandoIndex = -1;
-    window.limparFormularioProjeto();
+    limparFormularioProjeto();
     await carregarProjetos();
 }
 
 async function excluir(index) {
-    const resposta = await fetch(`/projetos/${index}`, { method: "DELETE" });
-    if (!resposta.ok) {
-        throw new Error("Falha ao excluir projeto");
-    }
-
+    await request(`/projetos/${index}`, { method: "DELETE" });
     editandoIndex = -1;
     await carregarProjetos();
 }
 
 function editar(index) {
     const item = ListaDeProjetos[index];
-    if (!item) {
-        return;
-    }
+    if (!item) return;
 
-    window.preencherFormularioProjeto(item);
+    preencherFormularioProjeto(item);
     editandoIndex = index;
 }
 
-window.ListaDeProjetos = ListaDeProjetos;
-window.adicionar = adicionar;
-window.excluir = excluir;
-window.editar = editar;
-
 document.addEventListener("DOMContentLoaded", () => {
-    carregarProjetos().catch((erro) => {
-        console.error(erro);
-    });
+    carregarProjetos().catch(console.error);
 });
