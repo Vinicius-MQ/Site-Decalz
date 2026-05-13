@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for, jsonify
+from orm import projeto, session, engine, base
 
 # Serve static from `static` and look for templates from project root
 app = Flask(__name__, static_folder="static", template_folder='templates')
@@ -28,16 +29,23 @@ def api_list_projetos():
 @app.route('/projetos', methods=['POST'])
 def api_create_projeto():
     data = request.get_json() or {}
-    nome = data.get('nome')
-    tipo = data.get('tipo')
-    link = data.get('link')
-    if nome and tipo and link:
-        lista_de_projetos.append({'nome': nome, 'tipo': tipo, 'link': link})
-        print("Projeto postado com sucesso")
-        print(lista_de_projetos)
-        return jsonify({'success': True}), 201
-    return jsonify({'error': 'invalid data'}), 400
 
+    nome = data.get("nome")
+    tipo = data.get("tipo")
+    link = data.get("link")
+
+    if nome and tipo and link:
+
+        novo_projeto = projeto(nome, tipo, link)
+
+        session.add(novo_projeto)
+        session.commit()
+
+        print("Projeto salvo no banco")
+
+        return jsonify({"success": True}), 201
+
+    return jsonify({"error": "invalid data"}), 400
 
 @app.route('/projetos/<int:index>', methods=['PUT'])
 def api_update_projeto(index):
