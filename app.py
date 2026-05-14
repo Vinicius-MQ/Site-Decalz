@@ -21,9 +21,17 @@ def crud():
 # ----- JSON API endpoints -----
 @app.route('/projetos', methods=['GET'])
 def api_list_projetos():
+    projetos = session.query(projeto).all()
+    lista=[]
+    for i in projetos:
+        lista.append({
+            "nome": i.nome,
+            "tipo": i.tipo,
+            "link": i.link
+        })
     print("Projetos listados com sucesso")
-    print(lista_de_projetos)
-    return jsonify(lista_de_projetos)
+    print(lista)
+    return jsonify(lista)
 
 
 @app.route('/projetos', methods=['POST'])
@@ -62,12 +70,13 @@ def api_update_projeto(index):
 
 
 @app.route('/projetos/<int:index>', methods=['DELETE'])
-def api_delete_projeto(index):
-    if 0 <= index < len(lista_de_projetos):
-        lista_de_projetos.pop(index)
-        print("Projeto excluído com sucesso")
-        print(lista_de_projetos)
+def api_delete_projeto(nome):
+    projeto = session.query(projeto).filter_by(nome=nome).first()
+    if projeto:
+        session.delete(projeto)
+        session.commit()
         return jsonify({'success': True})
+    
     return jsonify({'error': 'not found'}), 404
 
 
