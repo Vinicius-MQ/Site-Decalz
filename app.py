@@ -6,19 +6,16 @@ app = Flask(__name__, static_folder="static", template_folder='templates')
 
 lista_de_projetos = []
 
-# 🏠 HOME
 @app.route("/")
 def index():
     return render_template("index.html")
 
 
-# 📋 CRUD page (template will load JS which talks to the JSON API)
 @app.route("/crud")
 def crud():
     return render_template("crud.html")
 
 
-# ----- JSON API endpoints -----
 @app.route('/projetos', methods=['GET'])
 def api_list_projetos():
     projetos = session.query(projeto).all()
@@ -69,11 +66,11 @@ def api_update_projeto(index):
     return jsonify({'error': 'not found'}), 404
 
 
-@app.route('/projetos/<int:index>', methods=['DELETE'])
+@app.route('/projetos/<string:nome>', methods=['DELETE'])
 def api_delete_projeto(nome):
-    projeto = session.query(projeto).filter_by(nome=nome).first()
-    if projeto:
-        session.delete(projeto)
+    registro = session.query(projeto).filter_by(nome=nome).first()
+    if registro:
+        session.delete(registro)
         session.commit()
         return jsonify({'success': True})
     

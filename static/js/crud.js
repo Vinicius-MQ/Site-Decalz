@@ -33,8 +33,8 @@ async function adicionar() {
     await carregarProjetos();
 }
 
-async function excluir(index) {
-    await request(`/projetos/${index}`, { method: "DELETE" });
+async function excluir(nome) {
+    await request(`/projetos/${nome}`, { method: "DELETE" });
     editandoIndex = -1;
     await carregarProjetos();
 }

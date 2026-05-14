@@ -22,9 +22,9 @@
     }
 
     function preencherFormularioProjeto(projeto) {
-        if (nomeInput) nomeInput.value = projeto?.nome || "";
-        if (tipoInput) tipoInput.value = projeto?.tipo || "";
-        if (linkInput) linkInput.value = projeto?.link || "";
+        if (nomeInput) nomeInput.value = projeto.nome || "";
+        if (tipoInput) tipoInput.value = projeto.tipo || "";
+        if (linkInput) linkInput.value = projeto.link || "";
     }
 
     function renderizarListaProjetos(projetos, onEditar, onExcluir) {
@@ -34,20 +34,45 @@
         excluirAtual = onExcluir;
 
         if (!Array.isArray(projetos) || projetos.length === 0) {
-            lista.innerHTML = '<li class="project-empty">Nenhum item cadastrado em ListaDeProjetos.</li>';
+            lista.innerHTML =
+                '<li class="project-empty">Nenhum item cadastrado em ListaDeProjetos.</li>';
             return;
         }
 
         lista.innerHTML = projetos.map((projeto, index) => `
             <li class="project-item">
-                <img class="project-image" src="${projeto.link}" alt="${projeto.nome}" loading="lazy">
+                <img class="project-image"
+                     src="${projeto.link}"
+                     alt="${projeto.nome}"
+                     loading="lazy">
+
                 <div class="project-content">
                     <h3 class="project-name">${projeto.nome}</h3>
                     <p class="project-type">${projeto.tipo}</p>
-                    <a class="project-link" href="${projeto.link}" target="_blank" rel="noopener noreferrer">Abrir imagem</a>
+
+                    <a class="project-link"
+                       href="${projeto.link}"
+                       target="_blank"
+                       rel="noopener noreferrer">
+                       Abrir imagem
+                    </a>
+
                     <div class="project-actions">
-                        <button class="btn-action" type="button" data-action="editar" data-index="${index}">Editar</button>
-                        <button class="btn-action" type="button" data-action="excluir" data-index="${index}">Excluir</button>
+                        <button
+                            class="btn-action"
+                            type="button"
+                            data-action="editar"
+                            data-index="${index}">
+                            Editar
+                        </button>
+
+                        <button
+                            class="btn-action"
+                            type="button"
+                            data-action="excluir"
+                            data-nome="${projeto.nome}">
+                            Excluir
+                        </button>
                     </div>
                 </div>
             </li>
@@ -59,13 +84,21 @@
             const botao = event.target.closest("button[data-action]");
             if (!botao) return;
 
+            const nome = botao.dataset.nome;
             const index = Number(botao.dataset.index);
-            if (botao.dataset.action === "editar" && typeof editarAtual === "function") {
+
+            if (
+                botao.dataset.action === "editar" &&
+                typeof editarAtual === "function"
+            ) {
                 editarAtual(index);
             }
 
-            if (botao.dataset.action === "excluir" && typeof excluirAtual === "function") {
-                excluirAtual(index);
+            if (
+                botao.dataset.action === "excluir" &&
+                typeof excluirAtual === "function"
+            ) {
+                excluirAtual(nome);
             }
         });
     }
