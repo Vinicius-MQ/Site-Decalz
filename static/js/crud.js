@@ -8,9 +8,14 @@ async function request(url, options = {}) {
 }
 
 async function carregarProjetos() {
-    const res = await request("/projetos");
-    ListaDeProjetos = await res.json();
-    renderizarListaProjetos(ListaDeProjetos, editar, excluir);
+    try {
+        const res = await request("/projetos");
+        ListaDeProjetos = await res.json();
+        renderizarListaProjetos(ListaDeProjetos, editar, excluir);
+    } catch (erro) {
+        console.error("Erro ao carregar projetos:", erro);
+    }
+
 }
 
 async function adicionar() {
