@@ -11,6 +11,18 @@
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
+    "@prisma/client": "^6.19.3",
     "express": "^5.2.1"
-  }
+  },
+  "devDependencies": {
+    "prisma": "^6.19.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Vinicius-MQ/Site-Decalz.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Vinicius-MQ/Site-Decalz/issues"
+  },
+  "homepage": "https://github.com/Vinicius-MQ/Site-Decalz#readme"
 }

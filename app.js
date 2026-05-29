@@ -1,125 +1,81 @@
 const express = require("express");
 const path = require("path");
+const { PrismaClient } = require("@prisma/client");
 
 const app = express();
+const prisma = new PrismaClient();
 
 app.use(express.json());
-
 app.use(express.static("static"));
 
-let lista_de_projetos = [];
 
-
+// PÁGINAS
 app.get("/", (req, res) => {
-
     res.sendFile(path.join(__dirname, "templates", "index.html"));
-
 });
-
 
 app.get("/crud", (req, res) => {
-
     res.sendFile(path.join(__dirname, "templates", "crud.html"));
-
 });
 
 
-
-app.get("/projetos", (req, res) => {
-
-    console.log("Projetos listados com sucesso");
-    console.log(lista_de_projetos);
-
-    res.json(lista_de_projetos);
-
+// LISTAR
+app.get("/projetos", async (req, res) => {
+    const projetos = await prisma.projeto.findMany();
+    res.json(projetos);
 });
 
 
-app.post("/projetos", (req, res) => {
-
+// CRIAR
+app.post("/projetos", async (req, res) => {
     const { nome, tipo, link } = req.body;
 
-    if (nome && tipo && link) {
-
-        lista_de_projetos.push({
-            nome,
-            tipo,
-            link
-        });
-
-        console.log("Projeto postado com sucesso");
-        console.log(lista_de_projetos);
-
-        return res.status(201).json({
-            success: true
-        });
-
-    }
-
-    res.status(400).json({
-        error: "invalid data"
+    const projeto = await prisma.projeto.create({
+        data: { nome, tipo, link }
     });
 
+    res.status(201).json(projeto);
 });
 
 
-// EDITAR
-app.put("/projetos/:index", (req, res) => {
+// EDITAR (USANDO ID)
+app.put("/projetos/:id", async (req, res) => {
+    const id = Number(req.params.id);
 
-    const index = req.params.index;
-
-    if (index >= 0 && index < lista_de_projetos.length) {
-
-        const projeto = lista_de_projetos[index];
-
-        projeto.nome = req.body.nome || projeto.nome;
-        projeto.tipo = req.body.tipo || projeto.tipo;
-        projeto.link = req.body.link || projeto.link;
-
-        console.log("Projeto editado com sucesso");
-        console.log(lista_de_projetos);
-
-        return res.json({
-            success: true
+    try {
+        const atualizado = await prisma.projeto.update({
+            where: { id },
+            data: {
+                nome: req.body.nome,
+                tipo: req.body.tipo,
+                link: req.body.link
+            }
         });
 
+        res.json(atualizado);
+    } catch (err) {
+        res.status(404).json({ error: "Projeto não encontrado" });
     }
-
-    res.status(404).json({
-        error: "not found"
-    });
-
 });
 
 
-// EXCLUIR
-app.delete("/projetos/:index", (req, res) => {
+// DELETAR (USANDO ID)
+app.delete("/projetos/:id", async (req, res) => {
+    const id = Number(req.params.id);
 
-    const index = req.params.index;
-
-    if (index >= 0 && index < lista_de_projetos.length) {
-
-        lista_de_projetos.splice(index, 1);
-
-        console.log("Projeto excluído com sucesso");
-        console.log(lista_de_projetos);
-
-        return res.json({
-            success: true
+    try {
+        await prisma.projeto.delete({
+            where: { id }
         });
 
+        res.json({ success: true });
+    } catch (err) {
+        res.status(404).json({ error: "Projeto não encontrado" });
     }
-
-    res.status(404).json({
-        error: "not found"
-    });
-
 });
 
 
-// INICIAR SERVIDOR
+// START
 app.listen(5000, () => {
-
     console.log("Servidor rodando na porta 5000");
-
 });
