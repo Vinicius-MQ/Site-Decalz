@@ -1,37 +1,26 @@
 let ListaDeProjetos = [];
 let editandoIndex = -1;
 
-// Obter token do localStorage
 function obterToken() {
-    const token = localStorage.getItem("authToken");
-    console.log("📦 Token obtido:", token ? token.substring(0, 20) + "..." : "null");
-    return token;
+    return localStorage.getItem("authToken");
 }
 
-// Armazenar token no localStorage
 function armazenarToken(token) {
     localStorage.setItem("authToken", token);
-    console.log("💾 Token armazenado:", token.substring(0, 20) + "...");
 }
 
-// Remover token do localStorage
 function removerToken() {
     localStorage.removeItem("authToken");
-    console.log("🗑️ Token removido");
 }
 
-// Solicitar senha via prompt e fazer login
 async function fazerLogin() {
     const senha = prompt("Digite a senha de administrador:");
 
     if (senha === null) {
-        console.log("❌ Usuário cancelou o login");
         return null;
     }
 
     try {
-        console.log("🔐 Enviando login para /auth/login");
-
         const res = await fetch("/auth/login", {
             method: "POST",
             headers: {
@@ -42,53 +31,33 @@ async function fazerLogin() {
             })
         });
 
-        console.log("📡 Status do login:", res.status);
-
         if (!res.ok) {
-            alert("Senha incorreta!");
+            alert("Senha incorreta.");
             return null;
         }
 
         const data = await res.json();
 
-        console.log("📥 Resposta do servidor:", data);
-
         if (!data.token) {
-            console.error("❌ Token não recebido");
             return null;
         }
 
         armazenarToken(data.token);
 
-        console.log(
-            "💾 Verificação localStorage:",
-            localStorage.getItem("authToken")
-                ? "✅ Salvo"
-                : "❌ Não salvo"
-        );
-
         return data.token;
-
-    } catch (err) {
-        console.error("❌ Erro ao fazer login:", err);
+    } catch {
         alert("Erro ao fazer login.");
         return null;
     }
 }
 
 async function request(url, options = {}) {
-    console.log("🌐 Requisição:", options.method || "GET", url);
-
     const res = await fetch(url, options);
 
-    console.log("📡 Status:", res.status);
-
     if (res.status === 401) {
-        console.error("❌ Sessão inválida");
-
         removerToken();
 
-        alert("Sua sessão expirou. Faça login novamente.");
+        alert("Sua sessão expirou.");
 
         location.reload();
 
@@ -103,31 +72,22 @@ async function request(url, options = {}) {
     return res;
 }
 
-// Requisições autenticadas
 async function requestComAuth(url, options = {}) {
     const token = obterToken();
 
     if (!token) {
-        alert("Você não está autenticado.");
         location.reload();
         return null;
     }
 
-    const novasOpcoes = {
+    return request(url, {
         ...options,
         headers: {
             ...options.headers,
             "Content-Type": "application/json",
-            "Authorization": `Bearer ${token}`
+            Authorization: `Bearer ${token}`
         }
-    };
-
-    console.log(
-        "📤 Enviando Authorization:",
-        `Bearer ${token.substring(0, 20)}...`
-    );
-
-    return request(url, novasOpcoes);
+    });
 }
 
 async function carregarProjetos() {
@@ -178,13 +138,11 @@ async function adicionar() {
 
         alert(
             isEdicao
-                ? "Projeto atualizado com sucesso!"
-                : "Projeto criado com sucesso!"
+                ? "Projeto atualizado com sucesso."
+                : "Projeto criado com sucesso."
         );
-
     } catch (err) {
-        console.error("❌ Erro ao salvar projeto:", err);
-        alert("Erro ao salvar projeto: " + err.message);
+        alert(err.message);
     }
 }
 
@@ -194,12 +152,9 @@ async function excluir(id) {
     }
 
     try {
-        const res = await requestComAuth(
-            `/projetos/${id}`,
-            {
-                method: "DELETE"
-            }
-        );
+        const res = await requestComAuth(`/projetos/${id}`, {
+            method: "DELETE"
+        });
 
         if (!res) return;
 
@@ -207,27 +162,23 @@ async function excluir(id) {
 
         await carregarProjetos();
 
-        alert("Projeto excluído com sucesso!");
-
+        alert("Projeto excluído com sucesso.");
     } catch (err) {
-        console.error("❌ Erro ao excluir projeto:", err);
-        alert("Erro ao excluir projeto: " + err.message);
+        alert(err.message);
     }
 }
 
 function editar(id) {
-    const item = ListaDeProjetos.find(
-        projeto => projeto.id === id
-    );
+    const item = ListaDeProjetos.find(projeto => projeto.id === id);
 
-    if (!item) return;
+    if (!item) {
+        return;
+    }
 
     preencherFormularioProjeto(item);
-
     editandoIndex = item.id;
 }
 
-// LOGIN AUTOMÁTICO AO ENTRAR NA PÁGINA
 document.addEventListener("DOMContentLoaded", async () => {
     document.body.style.display = "none";
 
@@ -235,28 +186,14 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     if (!token) {
         token = await fazerLogin();
-        window.location.href = "/";
-        return;
+
+        if (!token) {
+            window.location.href = "/";
+            return;
+        }
     }
 
     document.body.style.display = "block";
 
     carregarProjetos().catch(console.error);
 });
-
-// ===== DEBUG =====
-
-window.verificarToken = () => {
-    console.log("Token:", localStorage.getItem("authToken"));
-};
-
-window.limparTudo = () => {
-    localStorage.clear();
-    console.log("🧹 localStorage limpo");
-};
-
-window.verificarServer = async () => {
-    const res = await fetch("/debug");
-    const data = await res.json();
-    console.table(data);
-};
