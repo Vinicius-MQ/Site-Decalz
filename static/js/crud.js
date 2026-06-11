@@ -33,18 +33,18 @@ async function adicionar() {
     await carregarProjetos();
 }
 
-async function excluir(index) {
-    await request(`/projetos/${index}`, { method: "DELETE" });
+async function excluir(id) {
+    await request(`/projetos/${id}`, { method: "DELETE" });
     editandoIndex = -1;
     await carregarProjetos();
 }
 
-function editar(index) {
-    const item = ListaDeProjetos[index];
+function editar(id) {
+    const item = ListaDeProjetos.find(p => p.id === id);
     if (!item) return;
 
     preencherFormularioProjeto(item);
-    editandoIndex = index;
+    editandoIndex = item.id;
 }
 
 document.addEventListener("DOMContentLoaded", () => {
