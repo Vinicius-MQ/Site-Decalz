@@ -1,17 +1,18 @@
 const express = require("express");
 const router = express.Router();
 const { PrismaClient } = require("@prisma/client");
+const { verifyToken } = require("../middleware/authJwt");
 
 const prisma = new PrismaClient();
 
-// LISTAR
+// LISTAR (público)
 router.get("/", async (req, res) => {
     const projetos = await prisma.projeto.findMany();
     res.json(projetos);
 });
 
-// CRIAR
-router.post("/", async (req, res) => {
+// CRIAR (protegido)
+router.post("/", verifyToken, async (req, res) => {
     const { nome, tipo, link } = req.body;
 
     const projeto = await prisma.projeto.create({
@@ -21,8 +22,8 @@ router.post("/", async (req, res) => {
     res.status(201).json(projeto);
 });
 
-// EDITAR (USANDO ID)
-router.put("/:id", async (req, res) => {
+// EDITAR (protegido)
+router.put("/:id", verifyToken, async (req, res) => {
     const id = Number(req.params.id);
 
     try {
@@ -41,8 +42,8 @@ router.put("/:id", async (req, res) => {
     }
 });
 
-// DELETAR (USANDO ID)
-router.delete("/:id", async (req, res) => {
+// DELETAR (protegido)
+router.delete("/:id", verifyToken, async (req, res) => {
     const id = Number(req.params.id);
 
     try {
